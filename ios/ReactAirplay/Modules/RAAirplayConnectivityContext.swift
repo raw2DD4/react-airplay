@@ -38,6 +38,10 @@ class RAAirplayConnectivityContext: RAEventEmitter {
 
   private func getAirplayConnectivity() -> Bool {
     let session = AVAudioSession.sharedInstance()
+    do {
+      try session.setCategory(AVAudioSession.Category.multiRoute)
+    } catch {       
+    }
     let airplayConnected = session.currentRoute.outputs.contains { $0.portType == .airPlay }
 
     return airplayConnected
